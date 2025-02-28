@@ -1,0 +1,60 @@
+:root {
+    --font1: 'Anton', sans-serif;
+    --font2: 'Manrope', sans-serif;
+    --color1: #FFD15B;
+}
+
+/*Header*/
+header {
+    background-image: url(./pictures/hdrbgnd.jpg);
+    background-size: cover;
+
+    h1 {
+        padding: 3rem;
+        
+        img {
+            width: 180px;
+            height: 25px;
+        } 
+    }
+
+    h2 {
+        font-family: var(--font1);
+        font-size: 44px;
+        color: #FFD15B;
+        text-align: center;
+    }
+
+    .search-bar {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding-bottom: 10rem;
+
+        input {
+            width: 50%;
+            height: 4rem;
+            border-radius: 11px;
+            border: none;
+            font-size: larger;
+            padding-left: 2rem;
+            padding-right: 5rem;
+        }
+
+        button {
+            position: relative;
+            right: 3.4rem;
+            top: 0.6rem;
+            width: 2.8rem;
+            height: 2.8rem;
+            background-color: #1B1B1B;
+            border-radius: 10px;
+            color: white;
+
+            i {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
