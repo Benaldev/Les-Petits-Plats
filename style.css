@@ -58,3 +58,17 @@ header {
     }
 }
 
+main {
+    .recipe-card {
+        img {
+            width: 380px;
+            height: 258px;
+            object-fit: cover;
+        }
+    }
+}
+
+
+
+
+

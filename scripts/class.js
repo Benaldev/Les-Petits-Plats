@@ -13,8 +13,8 @@ export class Recipe {
 
   recipeTemplate() {
     return `
-        <article class="recipe-card>
-            <img src="./recipes/${this.image}" alt="${this.name}">
+        <article class="recipe-card">
+            <img src="./recipes/recipes/${this.image}" alt="${this.name}" />
             <h3>${this.name}</h3>
             <p>${this.description}</p>
         </article>
