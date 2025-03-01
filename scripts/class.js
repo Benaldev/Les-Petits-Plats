@@ -11,4 +11,13 @@ export class Recipe {
         this.ustensils = data.ustensils
     }
 
-}
+    recipeTemplate() {
+        return `
+        <article class="recipe-card>
+            <img src="./recipes/${this.image}" alt="${this.name}">
+            <h3>${this.name}</h3>
+            <p>${this.description}</p>
+        </article>
+        `;
+    }
+};
