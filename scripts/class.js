@@ -16,7 +16,10 @@ export class Recipe {
         <article class="recipe-card">
             <img src="./recipes/recipes/${this.image}" alt="${this.name}" />
             <h3>${this.name}</h3>
+            <h4>RECETTE</h4>
             <p>${this.description}</p>
+            <h4>INGREDIENTS</h4>
+            <p>${this.ingredients}<p>
         </article>
         `;
   }
