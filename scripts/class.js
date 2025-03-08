@@ -19,7 +19,11 @@ export class Recipe {
             <h4>RECETTE</h4>
             <p>${this.description}</p>
             <h4>INGREDIENTS</h4>
-            <p>${this.ingredients}<p>
+            <ul>
+            ${this.ingredients.map((object) => {  //on map le tableau ingredients pour extraire les éléments de chacun des objets qui compose le tableau
+              return `<li><p class="ingredient">${object.ingredient}</p>${object.quantity ? `<p class="quantity">${object.quantity}${object.unit ? `<span> ${object.unit}</span>`: ''}</p>` : ''} </li>` 
+            }).join('')}
+            </ul>
         </article>
         `;
   }
