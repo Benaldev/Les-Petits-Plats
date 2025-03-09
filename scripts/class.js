@@ -14,12 +14,15 @@ export class Recipe {
   recipeTemplate() {
     return `
         <article class="recipe-card">
-            <img src="./recipes/recipes/${this.image}" alt="${this.name}" />
+            <div class="card-img">
+              <span class="time">${this.time}min</span>
+              <img src="./recipes/recipes/${this.image}" alt="${this.name}" />
+            </div>
             <div class="card-text">
-              <h3>${this.name}</h3>
-              <h4>RECETTE</h4>
+              <h4>${this.name}</h4>
+              <h5>RECETTE</h5>
               <p class="description">${this.description}</p>
-              <h4>INGREDIENTS</h4>
+              <h5>INGREDIENTS</h5>
               <ul>
               ${this.ingredients.map((object) => {  //on map le tableau ingredients pour extraire les éléments de chacun des objets qui compose le tableau
                 return `<li><p class="ingredient">${object.ingredient}</p>${object.quantity ? `<p class="quantity">${object.quantity}${object.unit ? `<span> ${object.unit}</span>`: ''}</p>` : ''} </li>` 
