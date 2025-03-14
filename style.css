@@ -65,6 +65,7 @@ header {
 
 main {
     padding: 3rem 10rem;
+    background-color: #EDEDED;
 
     .counter {
         display: flex;
@@ -73,6 +74,31 @@ main {
             font-family: var(--font1);
             font-weight: 400;
             font-size: 21px;
+        }
+    }
+
+    .filters-counter {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    
+        .filters {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+
+            .button-filter {
+                padding: 15px 15px;
+                background-color: white;
+                border: none;
+                border-radius: 11px;
+                font-family: var(--font2);
+                display: flex;
+                gap: 40px;
+                align-items: center;
+            }
         }
     }
     
