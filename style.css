@@ -109,8 +109,10 @@ main {
                     }
                 }
 
-                .ingredients-search {
+                .filter-search {
                     margin-top: 1rem;
+                    max-height: 15rem;
+                    overflow: auto;
 
                     ul {
                         list-style-type: none;
