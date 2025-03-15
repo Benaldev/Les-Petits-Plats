@@ -97,7 +97,20 @@ main {
                 border-radius: 11px;
                 font-family: var(--font2);
 
+                .text-symbol {
+                    display: flex;
+                    gap: 2rem;
+                    justify-content: space-between;
+                    align-items: center;
+                    cursor: pointer;
+
+                    p {
+                        margin: 0;
+                    }
+                }
+
                 .ingredients-search {
+                    margin-top: 1rem;
 
                     ul {
                         list-style-type: none;

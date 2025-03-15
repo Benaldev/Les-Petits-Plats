@@ -4,7 +4,19 @@ export const displayFilterIngredients = (recipesData) => {
     const buttonIngredients = document.createElement("button");
     buttonIngredients.classList.add("button-ingredients");
     buttonIngredients.id = "button-filter";
-    buttonIngredients.textContent = "Ingrédients";
+    ingredientContainer.appendChild(buttonIngredients);
+
+    const ingredientTextSymbol = document.createElement("div");
+    ingredientTextSymbol.setAttribute("class", "text-symbol");
+    buttonIngredients.appendChild(ingredientTextSymbol)
+
+    const buttonIngredientsText = document.createElement("p");
+    buttonIngredientsText.textContent = "Ingrédients";
+    ingredientTextSymbol.appendChild(buttonIngredientsText)
+
+    const buttonIngredientsAngleSymbol = document.createElement("i")
+    buttonIngredientsAngleSymbol.setAttribute("class", "fa-solid fa-angle-down");
+    ingredientTextSymbol.appendChild(buttonIngredientsAngleSymbol);
 
     const ingredientsSearch = document.createElement("div"); //le bloc qu'il faudra cacher
     ingredientsSearch.setAttribute("class", "ingredients-search");
@@ -25,7 +37,7 @@ export const displayFilterIngredients = (recipesData) => {
     const ingredientsList = document.createElement("ul");
     ingredientsSearch.appendChild(ingredientsList);
 
-    const ingredientsSet = new Set();
+    const ingredientsSet = new Set(); //va nour permettre d'éviter répition des éléments. Le set est une collection d'éléments uniques
 
     recipesData.forEach((recipes) => {
         recipes.ingredients.forEach((ingredients) => {
@@ -39,5 +51,16 @@ export const displayFilterIngredients = (recipesData) => {
         ingredientsList.appendChild(ingredientsLi);
     });
 
-    ingredientContainer.appendChild(buttonIngredients);
+    //on cache l'input et la liste des ingredients. Au clic, ils apparaissent/disparaissent
+    ingredientsSearch.style.display = "none";
+
+    ingredientTextSymbol.addEventListener("click", () => {
+        if (ingredientsSearch.style.display === "none") {
+            ingredientsSearch.style.display = "block";
+        } else {
+            ingredientsSearch.style.display = "none";
+        }
+        buttonIngredientsAngleSymbol.classList.toggle("fa-angle-up");
+        buttonIngredientsAngleSymbol.classList.toggle("fa-angle-down");
+    })
 };
