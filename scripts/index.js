@@ -1,6 +1,7 @@
 import { getRecipes } from "./dataFetcher.js";
 import { Recipe } from "./utils/recipeClass.js";
 import { updateCounter } from "./utils/updateCounter.js"
+import { displayFilterIngredients } from "./utils/filters.js"
 
 //MENU CARDS
 //const allRecipes = [];
@@ -29,6 +30,8 @@ recipesCardsContainer.innerHTML = recipesData
     .join("");
 
     updateCounter();
+
+    displayFilterIngredients(recipesData)
 };
 
 

@@ -89,15 +89,12 @@ main {
             gap: 3rem;
             flex-wrap: wrap;
 
-            .button-filter {
+            #button-filter {
                 padding: 15px 15px;
                 background-color: white;
                 border: none;
                 border-radius: 11px;
                 font-family: var(--font2);
-                display: flex;
-                gap: 40px;
-                align-items: center;
             }
         }
     }
