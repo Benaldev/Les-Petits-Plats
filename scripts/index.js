@@ -36,7 +36,7 @@ const displayRecipes = async () => {
   displayResults(recipes); 
 
   // recherche
-  setupSearch(recipes, displayResults); 
+  setupSearch(recipes, displayResults); //à construire dans searchalgo.js
 
   // les filtres
   displayFilterIngredients(recipesData);
