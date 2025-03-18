@@ -49,10 +49,10 @@ export const setupSearch = (recipes, displayResults) => {
     });
 
     searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") { // Vérifier si la touche "Entrée" est pressée
-            const text = searchInput.value; // Récupérer la valeur de l'input
-            const results = searchRecipe(text, recipes); // Lancer la recherche
-            displayResults(results); // Afficher les résultats
+        if (e.key === "Enter") { 
+            const text = searchInput.value;
+            const results = searchRecipe(text, recipes); 
+            displayResults(results); 
         }
     });
 };
