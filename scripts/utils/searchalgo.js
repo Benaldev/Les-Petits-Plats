@@ -29,3 +29,6 @@ export const setupSearch = (recipes, displayResults) => {
         displayResults(results);
     });
 };
+
+//La méthode .filter() parcourt toutes les recettes du tableau. À chaque recette, elle teste si au moins un des critères correspond (nameMatch, ingredientMatch, ou ustensilMatch). Si une recette correspond, elle est ajoutée aux résultats. Puis, l’algorithme passe à la recette suivante et fait le même test.
+//.some() permet d'optimiser la recherche. On aurait pu utiliser filter ou map mais elles continuerait à parcour tt le tableau même après avoir trouvé une correspondance.  
