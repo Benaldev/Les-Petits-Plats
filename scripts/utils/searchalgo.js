@@ -40,10 +40,19 @@ export const searchRecipe = (text, recipes) => {
 
 export const setupSearch = (recipes, displayResults) => {
     const searchInput = document.getElementById("search");
+    const searchButton = document.getElementById("search-bar-btn");
 
-    searchInput.addEventListener("input", (e) => {
-        const text = e.target.value;
+    searchButton.addEventListener("click", () => {
+        const text = searchInput.value;
         const results = searchRecipe(text, recipes); 
         displayResults(results);
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") { // Vérifier si la touche "Entrée" est pressée
+            const text = searchInput.value; // Récupérer la valeur de l'input
+            const results = searchRecipe(text, recipes); // Lancer la recherche
+            displayResults(results); // Afficher les résultats
+        }
     });
 };
