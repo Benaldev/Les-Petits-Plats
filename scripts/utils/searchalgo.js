@@ -1,4 +1,4 @@
-export const searchRecipe = (text, recipes) => {
+export const searchRecipe = (text, recipes, selectedIngredients = [], selectedAppliances = [], selectedUstensils = []) => {
     const lowerText = text.toLowerCase(); // convertir le texte en minuscules
 
     return recipes.filter(recipe => {
@@ -15,26 +15,89 @@ export const searchRecipe = (text, recipes) => {
             ustensil.toLowerCase().includes(lowerText)
         );
 
-        // retourne true si l'un des critères correspond
-        return nameMatch || ingredientMatch || ustensilMatch;
+        // check les filtres sélectionnés
+        const matchesSelectedIngredients = selectedIngredients.length === 0 ||
+            selectedIngredients.every(ingredient =>  //every vérifie si tous les éléments d'un tableau satisfont une condition
+                recipe.ingredients.some(recipeIngredient =>
+                    recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase()
+                )
+            );
+
+        const matchesSelectedAppliances = selectedAppliances.length === 0 ||
+            selectedAppliances.includes(recipe.appliance.toLowerCase());
+
+        const matchesSelectedUstensils = selectedUstensils.length === 0 ||
+            selectedUstensils.every(ustensil =>
+                recipe.ustensils.includes(ustensil.toLowerCase())
+            );
+
+        // retourne true si l'un des critères correspond et que les filtres sélectionnés sont respectés
+        return (nameMatch || ingredientMatch || ustensilMatch) &&
+            matchesSelectedIngredients &&
+            matchesSelectedAppliances &&
+            matchesSelectedUstensils;
     });
 };
 
 export const setupSearch = (recipes, displayResults) => {
+    // récupérer le champ de recherche et le bouton de recherche
     const searchInput = document.getElementById("search");
     const searchButton = document.getElementById("search-bar-btn");
 
+    // récupère les filtres sélectionnés
+    const getSelectedFilters = () => {
+
+        const selectedIngredientsElements = document.querySelectorAll(".selected-filter.ingredient"); // c'est une nodeList donc on le transforme en tableau à la ligne suivante
+        const selectedIngredients = Array.from(selectedIngredientsElements).map(element => {
+            return element.textContent.trim().toLowerCase();
+        });
+
+        const selectedAppliancesElements = document.querySelectorAll(".selected-filter.appliance");
+        const selectedAppliances = Array.from(selectedAppliancesElements).map(element => {
+            return element.textContent.trim().toLowerCase();
+        });
+
+        const selectedUstensilsElements = document.querySelectorAll(".selected-filter.ustensil");
+        const selectedUstensils = Array.from(selectedUstensilsElements).map(element => {
+            return element.textContent.trim().toLowerCase();
+        });
+
+        // retourne les filtres sélectionnés
+        return {
+            selectedIngredients: selectedIngredients,
+            selectedAppliances: selectedAppliances,
+            selectedUstensils: selectedUstensils
+        };
+    };
+
+    // clic sur le bouton de recherche
     searchButton.addEventListener("click", () => {
         const text = searchInput.value;
-        const results = searchRecipe(text, recipes); 
+
+        const filters = getSelectedFilters();
+        const selectedIngredients = filters.selectedIngredients;
+        const selectedAppliances = filters.selectedAppliances;
+        const selectedUstensils = filters.selectedUstensils;
+
+        // Filtre les recettes
+        const results = searchRecipe(text, recipes, selectedIngredients, selectedAppliances, selectedUstensils);
+
         displayResults(results);
     });
 
     searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") { // Vérifier si la touche "Entrée" est pressée
-            const text = searchInput.value; // Récupérer la valeur de l'input
-            const results = searchRecipe(text, recipes); // Lancer la recherche
-            displayResults(results); // Afficher les résultats
+        if (e.key === "Enter") {
+            const text = searchInput.value;
+
+            const filters = getSelectedFilters();
+            const selectedIngredients = filters.selectedIngredients;
+            const selectedAppliances = filters.selectedAppliances;
+            const selectedUstensils = filters.selectedUstensils;
+
+            // filtrer les recettes
+            const results = searchRecipe(text, recipes, selectedIngredients, selectedAppliances, selectedUstensils);
+
+            displayResults(results);
         }
     });
 };
