@@ -28,6 +28,7 @@ export const displayFilterIngredients = (recipesData) => {
 
     const searchBarIngredients = document.createElement("input");
     searchBarIngredients.setAttribute("type", "search");
+    searchBarIngredients.setAttribute("id", "ingredientsInput")
     searchBarAndGlass.appendChild(searchBarIngredients);
 
     const searchBarGlass = document.createElement("i");
@@ -47,6 +48,7 @@ export const displayFilterIngredients = (recipesData) => {
 
     ingredientsSet.forEach((ingredient) => {
         const ingredientsLi = document.createElement("li");
+        ingredientsLi.setAttribute("class", "ingrList")
         ingredientsLi.textContent = ingredient;
         ingredientsList.appendChild(ingredientsLi);
     });
@@ -63,7 +65,44 @@ export const displayFilterIngredients = (recipesData) => {
         buttonIngredientsAngleSymbol.classList.toggle("fa-angle-up");
         buttonIngredientsAngleSymbol.classList.toggle("fa-angle-down");
     })
+
+    //rechercher un ingrédient via l'input
+    searchBarIngredients.addEventListener("input", (e) => {
+        const text = e.target.value.toLowerCase();
+        const ingredientItems = document.querySelectorAll(".ingrList")
+
+        ingredientItems.forEach((item) => {
+            const ingredientName = item.textContent.toLowerCase();
+            if (ingredientName.includes(text)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+
+    //création d'une div affichant les ingrédients sélectionnés
+    ingredientsList.addEventListener("click", (e) => {
+        const ingredientItems = document.querySelectorAll(".ingrList")
+        ingredientItems.forEach((item) => {
+            const contentItem = item.textContent;
+            if (contentItem === e.target.textContent) {
+                const ingredientSelected = document.createElement("div")
+                ingredientSelected.setAttribute("class", "selected-filter ingredient")
+                ingredientSelected.innerHTML = `${contentItem} <i class="fa-solid fa-xmark delete-filter"></i>`
+                ingredientContainer.appendChild(ingredientSelected)
+
+                ingredientContainer.addEventListener("click", (e) => {
+                    if (e.target.classList.contains("delete-filter")) {
+                        e.target.parentElement.remove(); // suppr l'élément parent (le `div` sélectionné)
+                    }
+                });
+            }
+        })
+    })
+
 };
+
 
 
 export const displayFilterAppliances = (recipesData) => {
@@ -110,9 +149,10 @@ export const displayFilterAppliances = (recipesData) => {
     recipesData.forEach((recipes) => {
         appliancesSet.add(recipes.appliance);
     });
-   
+
     appliancesSet.forEach((appliance) => {
         const appliancesLi = document.createElement("li");
+        appliancesLi.setAttribute("class", "appliList")
         appliancesLi.textContent = appliance;
         appliancesList.appendChild(appliancesLi);
     });
@@ -127,6 +167,39 @@ export const displayFilterAppliances = (recipesData) => {
         }
         buttonAppliancesAngleSymbol.classList.toggle("fa-angle-up");
         buttonAppliancesAngleSymbol.classList.toggle("fa-angle-down");
+    })
+
+    searchBarAppliances.addEventListener("input", (e) => {
+        const text = e.target.value.toLowerCase();
+        const applianceItems = document.querySelectorAll(".appliList")
+
+        applianceItems.forEach((item) => {
+            const applianceName = item.textContent.toLowerCase();
+            if (applianceName.includes(text)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+
+    appliancesList.addEventListener("click", (e) => {
+        const applianceItems = document.querySelectorAll(".appliList")
+        applianceItems.forEach((item) => {
+            const contentItem = item.textContent;
+            if (contentItem === e.target.textContent) {
+                const applianceSelected = document.createElement("div")
+                applianceSelected.setAttribute("class", "selected-filter appliance")
+                applianceSelected.innerHTML = `${contentItem} <i class="fa-solid fa-xmark delete-filter"></i>`
+                appliancesContainer.appendChild(applianceSelected)
+
+                appliancesContainer.addEventListener("click", (e) => {
+                    if (e.target.classList.contains("delete-filter")) {
+                        e.target.parentElement.remove(); // suppr l'élément parent (le `div` sélectionné)
+                    }
+                });
+            }
+        })
     })
 };
 
@@ -143,7 +216,7 @@ export const displayFilterUstensils = (recipesData) => {
     buttonUstensils.appendChild(ustensilsTextSymbol)
 
     const buttonUstensilsText = document.createElement("p");
-    buttonUstensilsText.textContent = "Appareils";
+    buttonUstensilsText.textContent = "Ustensiles";
     ustensilsTextSymbol.appendChild(buttonUstensilsText)
 
     const buttonUstensilsAngleSymbol = document.createElement("i")
@@ -179,6 +252,7 @@ export const displayFilterUstensils = (recipesData) => {
 
     ustensilsSet.forEach((ustensils) => {
         const ustensilsLi = document.createElement("li");
+        ustensilsLi.setAttribute("class", "ustList")
         ustensilsLi.textContent = ustensils;
         ustensilsList.appendChild(ustensilsLi);
     });
@@ -194,4 +268,38 @@ export const displayFilterUstensils = (recipesData) => {
         buttonUstensilsAngleSymbol.classList.toggle("fa-angle-up");
         buttonUstensilsAngleSymbol.classList.toggle("fa-angle-down");
     })
+
+    searchBarUstensils.addEventListener("input", (e) => {
+        const text = e.target.value.toLowerCase();
+        const ustensilsItems = document.querySelectorAll(".ustList")
+
+        ustensilsItems.forEach((item) => {
+            const ustensilName = item.textContent.toLowerCase();
+            if (ustensilName.includes(text)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+
+    ustensilsList.addEventListener("click", (e) => {
+        const ustensilItems = document.querySelectorAll(".ustList")
+        ustensilItems.forEach((item) => {
+            const contentItem = item.textContent;
+            if (contentItem === e.target.textContent) {
+                const ustensilSelected = document.createElement("div")
+                ustensilSelected.setAttribute("class", "selected-filter  ustensil")
+                ustensilSelected.innerHTML = `${contentItem} <i class="fa-solid fa-xmark delete-filter"></i>`
+                ustensilsContainer.appendChild(ustensilSelected)
+
+                ustensilsContainer.addEventListener("click", (e) => {
+                    if (e.target.classList.contains("delete-filter")) {
+                        e.target.parentElement.remove(); // suppr l'élément parent (le `div` sélectionné)
+                    }
+                });
+            }
+        })
+    })
+
 };
