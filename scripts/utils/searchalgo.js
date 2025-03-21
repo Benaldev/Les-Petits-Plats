@@ -3,7 +3,7 @@ export const searchRecipe = (text, recipes, selectedIngredients = [], selectedAp
 
     return recipes.filter(recipe => {
         // nom rectte
-        const nameMatch = recipe.name.toLowerCase().includes(lowerText);
+        const nameMatch = recipe.name.toLowerCase().includes(lowerText); //includes() renvoie tue ou false
 
         // ingrédients
         const ingredientMatch = recipe.ingredients.some(ingredient => //La méthode some() teste si au moins un élément du tableau passe le test implémenté par la fonction fournie. Elle renvoie un booléen indiquant le résultat du test.
